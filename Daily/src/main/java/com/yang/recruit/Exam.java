@@ -14,7 +14,7 @@ public class Exam {
 
 	public static void main(String[] args) throws IOException {
 
-		f6();
+		f5();
 
 	}
 
@@ -110,6 +110,10 @@ public class Exam {
 		if (b1 == b2) {
 			System.out.println("boolean b1 == b2");
 		}
+
+		int a = 1;
+		int b = (a++) + (a++);
+		System.out.println(b);//
 
 	}
 
