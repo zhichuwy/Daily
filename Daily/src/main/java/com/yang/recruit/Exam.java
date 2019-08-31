@@ -14,7 +14,7 @@ public class Exam {
 
 	public static void main(String[] args) throws IOException {
 
-		f5();
+		f7();
 
 	}
 
@@ -99,6 +99,8 @@ public class Exam {
 
 	}
 
+	// 第一次push代码后出现下方错误， ==> Maven->Update Project
+	// 错误: 找不到或无法加载主类 com.yang.recruit.Exam
 	public static void f5() {
 
 		// int i = 0;
@@ -111,9 +113,9 @@ public class Exam {
 			System.out.println("boolean b1 == b2");
 		}
 
-		int a = 1;
-		int b = (a++) + (a++);
-		System.out.println(b);//
+		int a = 2;
+		int b = (a++) + (a++);// 2+3
+		System.out.println(b);// 5
 
 	}
 
