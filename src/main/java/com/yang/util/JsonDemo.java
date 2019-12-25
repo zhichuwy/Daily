@@ -21,6 +21,9 @@ import com.yang.entity.User;
 //Ctrl + D 删除当前行 
 //Ctrl + 1 quick fix
 
+
+// recruit 招聘
+
 public class JsonDemo {
 
 	// 带注解反序列化 <序列化结果逆过程>
