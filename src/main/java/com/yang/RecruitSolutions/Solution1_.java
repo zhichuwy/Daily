@@ -1,4 +1,4 @@
-package com.yang.recruit;
+package com.yang.RecruitSolutions;
 
 import java.io.File;
 import java.io.FileReader;
@@ -10,7 +10,7 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-public class Exam {
+public class Solution1_ {
 
 	public static void main(String[] args) throws IOException {
 
@@ -35,7 +35,6 @@ public class Exam {
 		}
 
 		fr.close();
-
 		System.out.println(sum);
 
 	}
@@ -47,12 +46,10 @@ public class Exam {
 		StringBuilder thirtySix = new StringBuilder();
 
 		// int 10 -> String 36
-
 		int shang = -1;
 		int yu = -1;
 
 		Stack<String> stack = new Stack<String>();
-
 		while (shang != 0) {
 			shang = decimal / 36;
 			yu = decimal % 36;
@@ -66,37 +63,25 @@ public class Exam {
 		}
 
 		int size = stack.size();
-
 		for (int i = 0; i < size; i++) {
-
 			thirtySix.append(stack.pop());
 		}
-
 		System.out.println(thirtySix.toString());
 
 		// String 36 -> int 10
-
 		String ts = thirtySix.toString();
-
 		int res = 0;
 		int len = ts.length();
 
 		for (int i = 0; i < ts.length(); i++) {
-
 			char ch = ts.charAt(--len);
-
 			if (ch >= 'a') {
-
 				res += (ch - 'a' + 10) * Math.pow(36, i);
-
 			} else {
-
 				res += (ch - '0') * Math.pow(36, i);
 			}
-
 		}
 		System.out.println(res);
-
 	}
 
 	// 第一次push代码后出现下方错误， ==> Maven->Update Project
