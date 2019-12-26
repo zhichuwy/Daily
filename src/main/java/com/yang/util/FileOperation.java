@@ -3,12 +3,8 @@ package com.yang.util;
 public class FileOperation {
 
 	/**
-	 *  文件重命名
 	 *  FFmpeg 提取音频 from .mp4
-	 *  FFmpeg 合并  Audio&Video->MP4
-	 * 
-	 *  路径 正则.后缀
-	 *  FFmpeg
+	 *  FFmpeg 合并  Audio&Video->MP4 路径 正则.后缀          
 	 * 
 	 */
 
@@ -28,6 +24,8 @@ public class FileOperation {
 		this.suffix = suffix;
 	}
 
+	
+	//文件重命名
 	public void reName(String pattern) {
 		
 		
