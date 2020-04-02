@@ -7,6 +7,13 @@ public class FileOperation {
 	 *  FFmpeg 合并  Audio&Video->MP4 路径 正则.后缀          
 	 * 
 	 */
+	
+	
+	public static void main(String[] args) {
+		
+		System.out.println(6^4);
+		
+	}
 
 	private String path;
 	private String pattern;
