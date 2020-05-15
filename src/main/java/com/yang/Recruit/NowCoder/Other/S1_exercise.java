@@ -1,4 +1,4 @@
-package com.yang.RecruitSolutions.Other;
+package com.yang.Recruit.NowCoder.Other;
 
 import java.io.File;
 import java.io.FileReader;
@@ -10,7 +10,7 @@ import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-public class Solution1_exercise {
+public class S1_exercise {
 
 	public static void main(String[] args) throws IOException {
 

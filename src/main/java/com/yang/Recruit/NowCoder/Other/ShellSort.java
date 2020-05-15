@@ -1,6 +1,6 @@
-package com.yang.RecruitSolutions.Offer.test;
+package com.yang.Recruit.NowCoder.Other;
 
-public class Test {
+public class ShellSort {
 
 	public void sort(int[] a) {
 		int N = a.length;
@@ -30,7 +30,7 @@ public class Test {
 
 	public static void main(String[] args) {
 		int[] a = { 15, 0, 6, 9, 3 };
-		Test t = new Test();
+		ShellSort t = new ShellSort();
 		t.sort(a);
 		for (int i = 0; i < a.length; i++) {
 			System.out.println(a[i]);

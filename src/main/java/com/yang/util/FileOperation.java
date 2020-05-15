@@ -3,16 +3,14 @@ package com.yang.util;
 public class FileOperation {
 
 	/**
-	 *  FFmpeg 提取音频 from .mp4
-	 *  FFmpeg 合并  Audio&Video->MP4 路径 正则.后缀          
+	 * FFmpeg 提取音频 from .mp4 FFmpeg 合并 Audio&Video->MP4 路径 正则.后缀
 	 * 
 	 */
-	
-	
+
 	public static void main(String[] args) {
-		
-		System.out.println(6^4);
-		
+
+		System.out.println(6 ^ 4);
+
 	}
 
 	private String path;
@@ -31,17 +29,13 @@ public class FileOperation {
 		this.suffix = suffix;
 	}
 
-	
-	//文件重命名
+	// 文件重命名
 	public void reName(String pattern) {
-		
-		
 
 	}
-	
-	
+
 	public void mergeAudioVideo(String audioPath, String videoPath) {
-		
+
 	}
 
 }
