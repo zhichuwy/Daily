@@ -1,6 +1,6 @@
 package com.yang.juc.threadlocal;
 
-public class ThreadLocaltest {
+public class ThreadLocalTest {
 	
 	static ThreadLocal<String> var = new ThreadLocal<String>();
 	

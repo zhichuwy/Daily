@@ -6,6 +6,9 @@ public class MyVolatile {
 
 	public static void main(String[] args) {
 		
+		
+		
+		
 	}
 
 }
