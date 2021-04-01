@@ -1,0 +1,182 @@
+public class DownloadWithRange implements Runnable {
+    private String urlLocation;
+    private String filePath;
+    private long start;
+    private long end;
+
+    DownloadWithRange(String urlLocation, String filePath, long start, long end) {
+        this.urlLocation = urlLocation;
+        this.filePath = filePath;
+        this.start = start;
+        this.end = end;
+    }
+
+    @Override
+    public void run() {
+        try {
+            HttpURLConnection conn = getHttp();
+            conn.setRequestProperty("Range", "bytes=" + start + "-" + end);
+
+            File file = new File(filePath);
+            RandomAccessFile out = null;
+            if (file != null) {
+                out = new RandomAccessFile(file, "rw");
+            }
+            out.seek(start);
+            InputStream in = conn.getInputStream();
+            byte[] b = new byte[1024];
+            int len = 0;
+            while ((len = in.read(b)) >= 0) {
+                out.write(b, 0, len);
+            }
+            in.close();
+            out.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+    public HttpURLConnection getHttp() throws IOException {
+        URL url = null;
+        if (urlLocation != null) {
+            url = new URL(urlLocation);
+        }
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setReadTimeout(5000);
+        conn.setRequestMethod("GET");
+
+        return conn;
+    }
+}
+
+
+public class DownloadFileWithThreadPool {
+
+    public void getFileWithThreadPool(String urlLocation, String filePath, int poolLength) throws IOException {
+        ExecutorService threadPool = Executors.newCachedThreadPool();
+
+        long len = getContentLength(urlLocation);
+        System.out.println(len);
+        for (int i = 0; i < poolLength; i++) {
+            long start = i * len / poolLength;
+            long end = (i + 1) * len / poolLength - 1;
+            if (i == poolLength - 1) {
+                end = len;
+            }
+            System.out.println(start+"---------------"+end);
+            DownloadWithRange download = new DownloadWithRange(urlLocation, filePath, start, end);
+            threadPool.execute(download);
+        }
+        threadPool.shutdown(); // ??? 终止条件  ???
+    }
+
+    public static long getContentLength(String urlLocation) throws IOException {
+        URL url = null;
+        if (urlLocation != null) {
+            url = new URL(urlLocation);
+        }
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setReadTimeout(5000);
+        conn.setRequestMethod("GET");
+        long len = conn.getContentLength();
+
+        return len;
+    }
+}
+
+
+
+public static void main(String[] args) {
+        Date startDate = new Date();
+        DownloadFileWithThreadPool pool = new DownloadFileWithThreadPool();
+        try {
+            pool.getFileWithThreadPool("http://mpge.5nd.com/2016/2016-11-15/74847/1.mp3", "D:\\1.mp3", 100);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(new Date().getTime() - startDate.getTime());
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+多文件下载，单文件单线程
+private static ExecutorService executorService = Executors.newFixedThreadPool(10);
+Future<byte[]> future = executorService.submit(new Callable<byte[]>() {}
+
+/**
+ * @author Nick 带线程池的文件下载类，线程大小10
+ *      文件数少的情况下，体现不大
+ * @version V1.0.0
+ * @Date 2017/8/2 20:43
+ */
+public class FileDownConnManager {
+
+    private static final Logger logger = LoggerFactory.getLogger(FileDownConnManager.class);
+    private static final FileDownConnManager connManager = new FileDownConnManager();
+    private static ExecutorService executorService = Executors.newFixedThreadPool(10);
+
+    public static FileDownConnManager getDefaultManager() {
+        return connManager;
+    }
+
+    public static byte[] fileDown(final String netURL) throws ExecutionException, InterruptedException {
+        Future<byte[]> future = executorService.submit(new Callable<byte[]>() {
+            @Override
+            public byte[] call() throws Exception {
+                Date date = new Date();
+                URL url;
+                byte[] getData = new byte[0]; // ??? ???
+                InputStream is = null;
+                try {
+                    url = new URL(netURL);
+                    URLConnection connection = url.openConnection();
+                    is = connection.getInputStream();
+                    getData = readInputStream(is); // ??? 单个文件大小  ???
+
+                } catch (IOException e) {
+                    logger.error("从URL获得字节流数组失败 " + ExceptionUtils.getMessage(e));
+                } finally {
+                    try {
+                        is.close();
+                    } catch (IOException e) {
+                        logger.error("从URL获得字节流数组流释放失败 " + ExceptionUtils.getMessage(e));
+                    }
+                }
+                return getData;
+            }
+        });
+        return future.get();//阻塞？？？
+    }
+}
+
+
+
+    @Test
+    public void test2() throws ExecutionException, InterruptedException, IOException {
+        long time1 = System.currentTimeMillis();
+        for(int i = 0; i < 15; i++) {
+            byte[] by1 = FileDownConnManager.fileDown("http://mpge.5nd.com/2016/2016-11-15/74847/1.mp3");
+            // Futertask返回阻塞？？？
+            //FileUtils.writeByteArrayToFile(new File("D:\\test2_"+i+".mp3"), by1);
+            //这里不是单线程？？？  一，边读边写(修改多线程单文件run http请求 start:end 0:contentLen) or 二，统一多线程写
+        }
+        System.out.println(System.currentTimeMillis() - time1);
+    }
+
+    @Test
+    public void test3() throws IOException {
+        long time1 = System.currentTimeMillis();
+        for(int i = 0; i < 15; i++) {
+            byte[] by1 = FileFromUrlUtil.getInputStreamFromUrl("http://mpge.5nd.com/2016/2016-11-15/74847/1.mp3");
+            FileUtils.writeByteArrayToFile(new File("D:\\test3_"+i+".mp3"), by1);
+        }
+        System.out.println(System.currentTimeMillis() - time1);
+    }
+    
+    
