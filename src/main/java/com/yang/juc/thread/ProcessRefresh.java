@@ -67,17 +67,17 @@ public class ProcessRefresh {
 	});
 	
 	
+	
 	@Test
-	public void f() {
+	public void f() throws InterruptedException {
 
-		t1.start();
-		t2.start();
+		//t1.start();
+		//t2.start();
 		
-		try {
-			Thread.sleep(1000 * 10);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		t1.join();
+		t2.join();
+		
+		//Thread.sleep(1000 * 10);
 		
 		System.out.println("OK");
 	}

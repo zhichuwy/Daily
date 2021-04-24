@@ -117,6 +117,7 @@ public class ThreadState {
 		}
 	}
 
+	/*
 	public void creatThread() {
 
 		MyThread t1 = new MyThread();
@@ -142,6 +143,5 @@ public class ThreadState {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
-
-	}
+	} */
 }
