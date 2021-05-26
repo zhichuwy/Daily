@@ -10,7 +10,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<log4j.version>2.1</log4j.version>
+		<log4j.version>2.13.3</log4j.version>
 		<junit.version>3.8.1</junit.version>
 		<jackson.version>2.9.3</jackson.version>
 	</properties>
