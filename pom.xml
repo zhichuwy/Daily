@@ -12,7 +12,7 @@
 	<properties>
 		<log4j.version>2.1</log4j.version>
 		<junit.version>3.8.1</junit.version>
-		<jackson.version>2.9.3</jackson.version>
+		<jackson.version>2.9.10.8</jackson.version>
 	</properties>
 
 	<dependencies>
